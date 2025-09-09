@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Travel-Wise - Incredible Vacations, Made Easy</title>
+    <title>Travel-Wiser - Incredible Vacations, Made Easy</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -18,7 +18,7 @@
             --color-primary: #10B981; --color-primary-hover: #059669;
             --color-dark: #1F2937; --color-dark-green: #064E3B;
         }
-        /* CRITICAL: overflow-x: hidden prevents horizontal scrollbars */
+        /* CRITICAL: overflow-x: hidden prevents all horizontal scroll issues */
         html, body { 
             font-family: 'Poppins', sans-serif; 
             background-color: #F9FAFB; 
@@ -27,35 +27,20 @@
             width: 100%;
         }
         
-        /* Wrapper for carousels to handle overflow and padding on mobile */
+        /* Wrapper for carousels to ensure they are full-width on mobile */
         .swiper-parent-container {
-            width: 100vw; /* Force it to be the width of the viewport */
+            width: 100vw;
             position: relative;
             left: 50%;
             transform: translateX(-50%);
         }
-        
         .swiper-container {
             padding-left: 1rem;
             padding-right: 1rem;
         }
-
-        @media (min-width: 640px) {
-            .swiper-container {
-                padding-left: 1.5rem;
-                padding-right: 1.5rem;
-            }
-        }
         @media (min-width: 1024px) {
-             .swiper-parent-container {
-                width: 100%;
-                position: static;
-                transform: none;
-             }
-            .swiper-container {
-                padding-left: 0;
-                padding-right: 0;
-            }
+             .swiper-parent-container { width: 100%; position: static; transform: none; }
+            .swiper-container { padding-left: 0; padding-right: 0; }
         }
 
         .swiper-button-next, .swiper-button-prev {
@@ -71,6 +56,13 @@
         
         .swiper-button-next:after, .swiper-button-prev:after { font-size: 1rem !important; font-weight: 800 !important; }
 
+        #search-bar-content { 
+            max-height: 0;
+            opacity: 0; 
+            overflow: hidden;
+            display: none; 
+        }
+        
         .theme-card { transition: all 0.4s ease; overflow: hidden; }
         .theme-card img { transition: all 0.4s ease; }
         .theme-card:hover img { transform: scale(1.1); }
@@ -81,7 +73,7 @@
 
 <body class="antialiased">
 
-    <!-- Header & Navigation -->
+    <!-- Header & Navigation (Unchanged) -->
     <header class="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-lg border-b border-gray-200" data-aos="fade-down">
         <div class="container mx-auto px-4 md:px-6 py-3 flex justify-between items-center">
             <a href="#" class="text-xl md:text-2xl font-bold text-[var(--color-dark)] flex items-center gap-2">
@@ -110,12 +102,14 @@
         </div>
     </header>
 
+    <!-- ▼▼▼ MAIN LAYOUT CORRECTED FOR PERFECT RESPONSIVENESS ▼▼▼ -->
     <main class="pt-20">
-        <!-- Hero Section -->
-        <section class="container mx-auto px-4 md:px-6 py-8 md:py-12">
-            <div class="bg-white p-4 md:p-6 rounded-2xl md:rounded-3xl shadow-lg" data-aos="fade-up">
+        <!-- Padded Container for most sections -->
+        <div class="container mx-auto px-4 md:px-6 py-8 md:py-12">
+            <!-- Hero Section -->
+            <section class="bg-white p-4 md:p-6 rounded-2xl md:rounded-3xl shadow-lg" data-aos="fade-up">
                 <div class="relative rounded-xl md:rounded-2xl overflow-hidden">
-                    <img src="assets/download.jpg" class="w-full h-[400px] md:h-[500px] object-cover" alt="Tropical beach">
+                    <img src="https://images.unsplash.com/photo-1507525428034-b723a9ce6890?q=80&w=2070&auto=format&fit=crop" class="w-full h-[400px] md:h-[500px] object-cover" alt="Tropical beach">
                     <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent flex flex-col justify-center items-center text-center text-white p-4 md:p-8">
                         <p class="font-medium" data-aos="fade-up" data-aos-delay="100">Make Your Hassle-Free Travel Plans Now!</p>
                         <h1 class="text-3xl md:text-6xl font-extrabold my-2 md:my-4 leading-tight" data-aos="fade-up" data-aos-delay="200">To The World Of An <br> Incredible Vacation.</h1>
@@ -132,9 +126,11 @@
                 </div>
             </div>
         </section>
+        <!-- End of Padded Container -->
+        </div>
 
-        <!-- Popular International Packages -->
-        <section id="packages" class="mt-16 md:mt-20" data-aos="fade-up">
+        <!-- Carousel sections are now OUTSIDE the main container to be full-width on mobile -->
+        <section id="packages" class="mt-8 md:mt-20" data-aos="fade-up">
             <div class="container mx-auto px-4 md:px-6">
                 <div class="flex flex-col md:flex-row justify-between md:items-center mb-6">
                     <h2 class="text-2xl md:text-3xl font-bold mb-4 md:mb-0">Popular International Packages</h2>
@@ -142,44 +138,44 @@
                 </div>
             </div>
             <div class="swiper-parent-container">
-                <div class="swiper-container international-packages overflow-visible md:overflow-hidden">
+                <div class="swiper-container international-packages">
                     <div class="swiper-wrapper"></div>
                     <div class="swiper-button-next"></div><div class="swiper-button-prev"></div>
                 </div>
             </div>
         </section>
         
-        <!-- Holiday Themes Mosaic Layout -->
-        <section class="container mx-auto px-4 md:px-6 mt-16 md:mt-20" data-aos="fade-up">
-            <h2 class="text-2xl md:text-3xl font-bold text-center mb-8">Browse Packages Through Holiday Themes</h2>
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                <a href="#" class="relative rounded-xl overflow-hidden group theme-card h-64 lg:h-full" data-aos="fade-right"><img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=2070&auto=format&fit=crop" class="w-full h-full object-cover"><div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex flex-col justify-end p-6 md:p-8"><h3 class="text-white text-2xl md:text-4xl font-bold overlay-text">Explore All Holiday Packages</h3><p class="text-white/80 overlay-text hidden md:block">Find your perfect getaway.</p></div></a>
-                <div class="grid grid-cols-2 grid-rows-2 gap-6">
-                    <a href="#" class="relative rounded-xl overflow-hidden group theme-card h-40 lg:h-full" data-aos="fade-left" data-aos-delay="100"><img src="https://images.unsplash.com/photo-1473496169904-658ba7c44d8a?q=80&w=2070&auto=format&fit=crop" class="w-full h-full object-cover"><div class="absolute inset-0 bg-black/40 flex items-center justify-center p-2"><h3 class="text-white text-lg md:text-2xl font-bold text-center">Beach Lovers</h3></div></a>
-                    <a href="#" class="relative rounded-xl overflow-hidden group theme-card h-40 lg:h-full" data-aos="fade-left" data-aos-delay="200"><img src="https://images.unsplash.com/photo-1551632811-561732d1e306?q=80&w=2070&auto=format&fit=crop" class="w-full h-full object-cover"><div class="absolute inset-0 bg-black/40 flex items-center justify-center p-2"><h3 class="text-white text-lg md:text-2xl font-bold text-center">Mountains</h3></div></a>
-                    <a href="#" class="relative rounded-xl overflow-hidden group theme-card h-40 lg:h-full" data-aos="fade-left" data-aos-delay="300"><img src="assets/adv.jpg" class="w-full h-full object-cover"><div class="absolute inset-0 bg-black/40 flex items-center justify-center p-2"><h3 class="text-white text-lg md:text-2xl font-bold text-center">Adventure</h3></div></a>
-                    <a href="#" class="relative rounded-xl overflow-hidden group theme-card h-40 lg:h-full" data-aos="fade-left" data-aos-delay="400"><img src="https://images.unsplash.com/photo-1604719312566-8912e9227c6a?q=80&w=1974&auto=format&fit=crop" class="w-full h-full object-cover"><div class="absolute inset-0 bg-black/40 flex items-center justify-center p-2"><h3 class="text-white text-lg md:text-2xl font-bold text-center">Temples</h3></div></a>
+        <!-- Padded Container for the rest of the content -->
+        <div class="container mx-auto px-4 md:px-6 mt-16 md:mt-20">
+            <section data-aos="fade-up">
+                <h2 class="text-2xl md:text-3xl font-bold text-center mb-8">Browse Packages Through Holiday Themes</h2>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <a href="#" class="relative rounded-xl overflow-hidden group theme-card h-64 lg:h-full" data-aos="fade-right"><img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=2070&auto=format&fit=crop" class="w-full h-full object-cover"><div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex flex-col justify-end p-6 md:p-8"><h3 class="text-white text-2xl md:text-4xl font-bold overlay-text">Explore All Holiday Packages</h3><p class="text-white/80 overlay-text hidden md:block">Find your perfect getaway.</p></div></a>
+                    <div class="grid grid-cols-2 grid-rows-2 gap-6">
+                        <a href="#" class="relative rounded-xl overflow-hidden group theme-card h-40 lg:h-full" data-aos="fade-left" data-aos-delay="100"><img src="https://images.unsplash.com/photo-1473496169904-658ba7c44d8a?q=80&w=2070&auto=format&fit=crop" class="w-full h-full object-cover"><div class="absolute inset-0 bg-black/40 flex items-center justify-center p-2"><h3 class="text-white text-lg md:text-2xl font-bold text-center">Beach Lovers</h3></div></a>
+                        <a href="#" class="relative rounded-xl overflow-hidden group theme-card h-40 lg:h-full" data-aos="fade-left" data-aos-delay="200"><img src="https://images.unsplash.com/photo-1551632811-561732d1e306?q=80&w=2070&auto=format&fit=crop" class="w-full h-full object-cover"><div class="absolute inset-0 bg-black/40 flex items-center justify-center p-2"><h3 class="text-white text-lg md:text-2xl font-bold text-center">Mountains</h3></div></a>
+                        <a href="#" class="relative rounded-xl overflow-hidden group theme-card h-40 lg:h-full" data-aos="fade-left" data-aos-delay="300"><img src="https://images.unsplash.com/photo-1496568816309-51d7c20e3b2e?q=80&w=1974&auto=format&fit=crop" class="w-full h-full object-cover"><div class="absolute inset-0 bg-black/40 flex items-center justify-center p-2"><h3 class="text-white text-lg md:text-2xl font-bold text-center">Adventure</h3></div></a>
+                        <a href="#" class="relative rounded-xl overflow-hidden group theme-card h-40 lg:h-full" data-aos="fade-left" data-aos-delay="400"><img src="https://images.unsplash.com/photo-1604719312566-8912e9227c6a?q=80&w=1974&auto=format&fit=crop" class="w-full h-full object-cover"><div class="absolute inset-0 bg-black/40 flex items-center justify-center p-2"><h3 class="text-white text-lg md:text-2xl font-bold text-center">Temples</h3></div></a>
+                    </div>
                 </div>
-            </div>
-        </section>
+            </section>
+        </div>
 
-        <!-- Best Selling Packages Section -->
         <section class="mt-16 md:mt-20" data-aos="fade-up">
             <div class="container mx-auto px-4 md:px-6">
                 <div class="flex flex-col md:flex-row justify-between md:items-center mb-6">
-                    <h2 class="text-2xl md:text-3xl font-bold mb-4 md:mb-0">Best Selling Packages <span class="text-lg font-medium text-gray-500">Within Nigeria</span></h2>
+                    <h2 class="text-2xl md:text-3xl font-bold mb-4 md:mb-0">Best Selling Packages <span class="text-lg font-medium text-gray-500">Within India</span></h2>
                     <a href="#" class="bg-[var(--color-dark)] text-white px-5 py-2 rounded-lg text-sm font-semibold hover:bg-gray-800 transition self-start md:self-center">View All (200+)</a>
                 </div>
             </div>
             <div class="swiper-parent-container">
-                <div class="swiper-container domestic-packages overflow-visible md:overflow-hidden">
+                <div class="swiper-container domestic-packages">
                     <div class="swiper-wrapper"></div>
                     <div class="swiper-button-next"></div><div class="swiper-button-prev"></div>
                 </div>
             </div>
         </section>
             
-        <!-- How It Works, Travellers' Choice, Testimonials -->
         <div class="container mx-auto px-4 md:px-6 mt-16 md:mt-20">
             <section id="how-it-works" class="py-10 md:py-20 [perspective:1000px]">
                 <div id="how-it-works-content" class="bg-[var(--color-dark-green)] text-white rounded-2xl p-8 md:p-12 [transform-style:preserve-3d]">
@@ -198,10 +194,10 @@
             </section>
             <section class="mt-16 md:mt-20" data-aos="fade-up">
                 <div class="bg-amber-50 rounded-2xl p-8 md:p-12 text-center">
-                    <h2 class="text-2xl md:text-3xl font-bold text-amber-900 mb-2">Happy Customers</h2>
+                    <h2 class="text-2xl md:text-3xl font-bold text-amber-900 mb-2">Over 1 Lac+ Happy Customers</h2>
                     <p class="text-amber-800/80 mb-8">See What Our Customers Say About Us</p>
                     <div class="swiper-parent-container">
-                        <div class="swiper-container testimonials overflow-hidden">
+                        <div class="swiper-container testimonials">
                             <div class="swiper-wrapper"></div>
                             <div class="swiper-button-next"></div><div class="swiper-button-prev"></div>
                         </div>
@@ -220,7 +216,7 @@
                 <a href="#" class="bg-white text-[var(--color-dark)] px-6 py-3 rounded-lg font-semibold hover:bg-gray-200 transition">Get Expert's Callback</a>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 text-sm">
-                <div class="lg:col-span-2"><h3 class="text-xl font-bold mb-4">Travel-Wiser</h3><ul class="space-y-3 text-white/70"><li class="flex items-start gap-2"><i data-lucide="phone" class="w-4 h-4 mt-1 flex-shrink-0"></i><span>+234 815 6789 010</span></li><li class="flex items-start gap-2"><i data-lucide="mail" class="w-4 h-4 mt-1 flex-shrink-0"></i><span>explore@travelwise.com</span></li><li class="flex items-start gap-2"><i data-lucide="map-pin" class="w-4 h-4 mt-1 flex-shrink-0"></i><span>Bridge Opera House Grant Road, Ibadan, Nigeria</span></li></ul></div>
+                <div class="lg:col-span-2"><h3 class="text-xl font-bold mb-4">Travel-Wiser</h3><ul class="space-y-3 text-white/70"><li class="flex items-start gap-2"><i data-lucide="phone" class="w-4 h-4 mt-1 flex-shrink-0"></i><span>+12 34567 89010</span></li><li class="flex items-start gap-2"><i data-lucide="mail" class="w-4 h-4 mt-1 flex-shrink-0"></i><span>explore@travelwiser.com</span></li><li class="flex items-start gap-2"><i data-lucide="map-pin" class="w-4 h-4 mt-1 flex-shrink-0"></i><span>Bridge Opera House Grant Road, Ibadan, India</span></li></ul></div>
                 <div><h4 class="font-semibold mb-4">Interests</h4><ul class="space-y-2 text-white/70"><li class="hover:text-[var(--color-primary)]"><a href="#">Adventure Travel</a></li><li class="hover:text-[var(--color-primary)]"><a href="#">Art and Culture</a></li><li class="hover:text-[var(--color-primary)]"><a href="#">Family Holidays</a></li></ul></div>
                 <div><h4 class="font-semibold mb-4">Destinations</h4><ul class="space-y-2 text-white/70"><li class="hover:text-[var(--color-primary)]"><a href="#">Africa Packages</a></li><li class="hover:text-[var(--color-primary)]"><a href="#">Europe Packages</a></li><li class="hover:text-[var(--color-primary)]"><a href="#">USA Packages</a></li></ul></div>
                 <div><h4 class="font-semibold mb-4">Quick Links</h4><ul class="space-y-2 text-white/70"><li class="hover:text-[var(--color-primary)]"><a href="#">About</a></li><li class="hover:text-[var(--color-primary)]"><a href="#">Contact Us</a></li><li class="hover:text-[var(--color-primary)]"><a href="#">Blog</a></li></ul></div>
@@ -245,41 +241,10 @@
         AOS.init({ duration: 800, once: false });
 
         // --- DATA ---
-const international_packages = [
-    { 
-        name: 'Dubai', 
-        price: '₹10,000', 
-        img: 'https://images.unsplash.com/photo-1518684079-3c830dcef090?q=80&w=800&h=1000&auto=format&fit=crop' 
-    },
-    { 
-        name: 'Europe', 
-        price: '₹13,000', 
-        img: 'assets/europe.jpg' 
-    },
-    { 
-        name: 'Thailand', 
-        price: '₹8,000', 
-        img: 'https://images.unsplash.com/photo-1548013146-72479768bada?q=80&w=800&h=1000&auto=format&fit=crop' 
-    },
-    { 
-        name: 'Maldives', 
-        price: '₹16,000', 
-        img: 'https://images.unsplash.com/photo-1573843981267-be1999ff37cd?q=80&w=800&h=1000&auto=format&fit=crop' 
-    },
-    { 
-        name: 'Turkey', 
-        price: '₹31,000', 
-        img: 'assets/turkey.webp' 
-    },
-    { 
-        name: 'Paris', 
-        price: '₹18,000', 
-        img: 'assets/paris.jpg' 
-    }
-];
-        const domestic_packages = [ { name: 'Ikogosi Warm Springs, Ekiti State', price: '₹10,000', img: 'assets/ikogosi.jpg' }, { name: 'Yankari Game Reserve Tour, Bauchi State', price: '₹4,000', img: 'assets/games.jpg' }, { name: 'Obudu Mountain Resort, Cross River State', price: '₹4,000', img: 'https://images.unsplash.com/photo-1616782253903-88c2f5d9472a?q=80&w=2070&auto=format&fit=crop' }, { name: 'Calabar, Cross River State Tour', price: '₹8,000', img: 'https://images.unsplash.com/photo-1593323539233-15a0a3b25f18?q=80&w=2070&auto=format&fit=crop' }, ];
+        const international_packages = [ { name: 'Dubai', price: '₹10,000', img: 'https://images.unsplash.com/photo-1518684079-3c830dcef090?q=80&w=800&h=1000&auto=format&fit=crop' }, { name: 'Europe', price: '₹13,000', img: 'assets/europe.jpg' }, { name: 'Thailand', price: '₹8,000', img: 'https://images.unsplash.com/photo-1548013146-72479768bada?q=80&w=800&h=1000&auto=format&fit=crop' }, { name: 'Maldives', price: '₹16,000', img: 'https://images.unsplash.com/photo-1573843981267-be1999ff37cd?q=80&w=800&h=1000&auto=format&fit=crop' }, { name: 'Turkey', price: '₹31,000', img: 'assets/turkey.webp' }, { name: 'Paris', price: '₹18,000', img: 'assets/paris.jpg' }, ];
+        const domestic_packages = [ { name: 'Ikogosi Warm Springs, Ekiti State', price: '₹10,000', img: 'assets/ikogosi.jpg' }, { name: 'Yankari Game Reserve, Bauchi State', price: '₹4,000', img: 'assets/games.jpg' }, { name: 'Obudo Mountain Resort', price: '₹4,000', img: 'https://images.unsplash.com/photo-1616782253903-88c2f5d9472a?q=80&w=800&h=1000&auto=format&fit=crop' }, { name: 'Shimla', price: '₹8,000', img: 'https://images.unsplash.com/photo-1593323539233-15a0a3b25f18?q=80&w=800&h=1000&auto=format&fit=crop' }, ];
         const travellers_choice = [ { name: 'Eko Hotels', days: '7 Days & 6 Nights', img: 'https://images.unsplash.com/photo-1587974928422-5a932585f653?q=80&w=2070&auto=format&fit=crop' }, { name: 'Mauritius', days: '4 Days & 3 Nights', img: 'https://images.unsplash.com/photo-1542044896530-05d85be9b115?q=80&w=2070&auto=format&fit=crop' }, { name: 'Thailand', days: '6 Days & 5 Nights', img: 'https://images.unsplash.com/photo-1548013146-72479768bada?q=80&w=1974&auto=format&fit=crop' }, { name: 'Bali, Indonesia', days: '4 Days & 3 Nights', img: 'https://images.unsplash.com/photo-1547291129-44766f034633?q=80&w=2070&auto=format&fit=crop' }, ];
-        const testimonials = [ { name: 'Adeola Tayo', text: 'An absolutely unforgettable experience! Travel-Wise handled every detail with perfection. The quotes were competitive and the booking process was seamless. Highly recommended!', avatar: 'https://randomuser.me/api/portraits/men/32.jpg' }, { name: 'Priya Faith', text: 'Our family holiday to Europe was a dream come true, thanks to the amazing team at Travel-Wise. They customized the perfect itinerary for us.', avatar: 'https://randomuser.me/api/portraits/women/44.jpg' }, { name: 'Remi Dave', text: 'From the mountains to the beaches, every part of our trip was perfectly organized. I will definitely be booking with Travel-Wise again for my next adventure!', avatar: 'https://randomuser.me/api/portraits/men/46.jpg' } ];
+        const testimonials = [ { name: 'Rishabh Thakur', text: 'An absolutely unforgettable experience! Travel-Wiser handled every detail with perfection. The quotes were competitive and the booking process was seamless. Highly recommended!', avatar: 'https://randomuser.me/api/portraits/men/32.jpg' }, { name: 'Priya Sharma', text: 'Our family holiday to Europe was a dream come true, thanks to the amazing team at Travel-Wiser. They customized the perfect itinerary for us.', avatar: 'https://randomuser.me/api/portraits/women/44.jpg' }, { name: 'David Chen', text: 'From the mountains to the beaches, every part of our trip was perfectly organized. I will definitely be booking with Travel-Wiser again for my next adventure!', avatar: 'https://randomuser.me/api/portraits/men/46.jpg' } ];
         
         // --- SWIPER INITIALIZATION ---
         function createSwiper(selector, packages, config = {}) {
@@ -339,4 +304,3 @@ const international_packages = [
     </script>
 </body>
 </html>
-
